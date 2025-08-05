@@ -10,15 +10,29 @@
   border: 2px dashed #fff;
   border-radius: 12px;
 
-  /* Simula rebordo grosso costurado */
   box-shadow:
-    0 0 0 4px #51a2ff, /* rebordo externo */
-    2px 1px 6px 4px rgba(0, 0, 0, 0.4); /* sombra */
+    0 0 0 4px #51a2ff, 
+    2px 1px 6px 4px rgba(0, 0, 0, 0.4); 
 
   text-shadow: -1px -1px #004696;
   font-family: 'Segoe UI', sans-serif;
   font-weight: 500;
 
   transition: all 0.3s ease-in-out;
+}
+
+.stitched-border {
+  padding: 12px 24px;
+  margin: 10px;
+  background: #51a2ff;
+  border: 2px dashed #fff;
+  border-radius: 12px;
+
+  
+  box-shadow:
+    0 0 0 4px #51a2ff, 
+    2px 1px 6px 4px rgba(0, 0, 0, 0.4); 
+
+
 }
 
