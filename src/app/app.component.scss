@@ -1,0 +1,12 @@
+::ng-deep .owl-stage-outer {
+  display: block;
+    height: 100% !important;
+}
+
+::ng-deep .owl-stage,
+::ng-deep owl-stage,
+::ng-deep owl-stage div,
+::ng-deep .owl-item {
+    display: block;
+    height: 100% !important;
+}

@@ -1,0 +1,11 @@
+<div class="h-full w-full py-[20px]">
+    <owl-carousel-o [options]="customOptions" class="h-full flex rounded-3xl bg-[#51a2ff] stitched">
+        @for (image of imagePaths; track $index) {
+            <ng-template carouselSlide>
+                <div class="flex! h-full align-center justify-center">
+                    <img [src]="image" alt="Imagem 1" class="h-auto object-contain">
+                </div>
+            </ng-template>
+        }
+    </owl-carousel-o>
+</div>
