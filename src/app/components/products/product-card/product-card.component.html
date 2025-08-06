@@ -1,0 +1,20 @@
+<div  class="product-card stitched-border">
+    <div class="min-h-[150px]">
+        <owl-carousel-o [options]="carouselOptions">
+            @for (image of product().imagePaths; track $index) {
+                <ng-template carouselSlide>
+                    <img [src]="image" alt="product image" class="w-full h-auto max-h-[150px] object-contain" />
+                </ng-template>
+            }
+        </owl-carousel-o>
+    </div>
+    <div class="product-footer">
+        <div class="info">
+            <h3>{{ product().name }}</h3>
+            <p>{{ product().price }}€</p>
+        </div>
+        <button class="add-btn" (click)="addToCart()">
+            🛒 Adicionar
+        </button>
+    </div>
+</div>

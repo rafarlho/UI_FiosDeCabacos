@@ -1,0 +1,42 @@
+.product-card {
+    display: grid;
+    grid-template-columns: 100% ;
+    gap:5px;
+
+    .product-footer {
+        border: 3px solid white;
+        background-color: white;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        padding: 0px 10px;
+        justify-content: space-between;
+        align-items: center;
+        
+        .info {
+            h3 {
+                margin: 0;
+                font-size: 2.0rem;
+                font-weight: 600;
+                color: #00397a;
+            }
+
+            p {
+                margin: 0;
+                font-size: 1.0rem;
+                color: #00397a;
+            }
+        }
+
+        .add-btn {
+            background: #00397a;
+            border: none;
+            color: white;
+            padding: 8px 14px;
+            border: 1px solid white;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    }
+}

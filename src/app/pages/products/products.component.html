@@ -1,1 +1,5 @@
-<p>products works!</p>
+<div class="h-full w-full flex flex-col gap-[5px] overflow-auto">
+    @for (product of products; track $index) {
+        <app-product-card  [index]="$index" [product]="product"/>
+    }
+</div>
