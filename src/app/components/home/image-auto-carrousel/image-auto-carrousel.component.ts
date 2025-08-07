@@ -12,9 +12,11 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 export class ImageAutoCarrouselComponent {
 
     imagePaths: string[] = [
-    'assets/images/home/istockphoto-868117874-612x612.jpg',
-    'assets/images/home/istockphoto-1331057237-612x612.jpg',
-    'assets/images/home/istockphoto-1492185164-612x612.jpg'
+    'assets/images/products/lion1.jpg',
+    'assets/images/products/turtlem1.jpg',
+    'assets/images/products/babykit.jpg',
+    'assets/images/products/top1.jpg',
+    'assets/images/products/bunnyBaby1.jpg',
   ];
 
   customOptions: OwlOptions = {
@@ -33,7 +35,7 @@ export class ImageAutoCarrouselComponent {
     },
     nav: false,
     autoplay: true,
-    autoplayTimeout: 5000, 
+    autoplayTimeout: 2500, 
     autoplayHoverPause: true
 
     }

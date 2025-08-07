@@ -1,1 +1,38 @@
-<p>cart works!</p>
+
+@if(cartStoreItems().length) {
+    <div class="flex justify-center pt-[5px]">
+            <button nz-button nzGhost nzType="primary"  (click)="openUserInfoModal()">Encomendar artigos selecionados</button>
+    </div>
+}
+<div class="flex-1 w-full flex flex-col p-[10px] gap-[10px]">
+    @for (item of cartStoreItems(); track $index) {
+        <div class="grid py-[10px] px-[5px] grid-cols-2 outline rounded-md border-[#00397a]" >
+            <img [src]="item.product.imagePaths[0]" [alt]="item.product.name" class="max-h-[150px] justify-self-center">
+            <div class="flex px-[10px] flex-col justify-between">
+                <div>
+                    <h3>{{item.product.name}}</h3>
+                    @if(item.product.price) {
+                        <p>{{item.product.price}}€</p>
+                    } @else {
+                        <p>Sob consulta</p>
+                    }
+                </div>
+                <div class="flex items-center justify-center gap-[5px] px-[5px]">
+                    <button nz-button nzType="primary" nzShape="circle" nzShape="round" (click)="updateQuantity(item,subtract)">
+                        <nz-icon nzType="minus" />
+                    </button>
+
+                    <button nz-button nzType="primary" nzShape="circle" nzShape="round">
+                        {{item.quantity}}
+                    </button>
+
+                    <button nz-button nzType="primary" nzShape="circle" nzShape="round" (click)="updateQuantity(item,add)">
+                        <nz-icon nzType="plus" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    } @empty {
+        <p class="self-center">Não existem items selecionados...</p>
+    }
+</div>

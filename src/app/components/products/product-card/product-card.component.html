@@ -11,7 +11,11 @@
     <div class="product-footer">
         <div class="info">
             <h3>{{ product().name }}</h3>
-            <p>{{ product().price }}€</p>
+            @if(product().price) {
+                <p>{{ product().price }}€</p>
+            } @else {
+                <p>Sob consulta</p>
+            }
         </div>
         <button class="add-btn" (click)="addToCart()">
             🛒 Adicionar
