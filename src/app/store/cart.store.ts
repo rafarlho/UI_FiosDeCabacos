@@ -1,7 +1,8 @@
+import { effect } from "@angular/core";
 import { products } from "../components/products/products-config";
 import { CartItem } from "../models/cart-item.model";
 import { Product } from "../models/product.model"
-import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
+import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
 
 type CartState = {
     selectedItems: CartItem[]
@@ -11,10 +12,11 @@ const initialState : CartState =  {
     selectedItems: []
 }
 
+const CART_STORAGE_KEY = 'cartState';
+
 export const CartStore = signalStore(
     { providedIn: 'root' },
     withState(initialState),
-
     withMethods(store => ({
         addProduct(newProduct:Product) {
             const currentItems = store.selectedItems()
@@ -24,7 +26,7 @@ export const CartStore = signalStore(
             
             else
                 currentItems.push({product:newProduct, quantity:1})
-
+            this.saveStateToLocalStorage({selectedItems:currentItems})
             patchState(store,{selectedItems:currentItems})
         },
 
@@ -37,12 +39,40 @@ export const CartStore = signalStore(
                 } else {
                     foundItem.quantity = newQuantity
                 }
+                this.saveStateToLocalStorage({selectedItems:currentItems})
                 patchState(store,{selectedItems:currentItems})
             }
         },
 
         clearStore() {
+            this.saveStateToLocalStorage({selectedItems:[]})
             patchState(store,{selectedItems:[]})
+        },
+
+        loadStateFromLocalStorage() {
+            try {
+                const storedState = localStorage.getItem(CART_STORAGE_KEY);
+                if (storedState) {
+                    const parsedState: CartState = JSON.parse(storedState);
+                    patchState(store, parsedState);
+                }
+            } catch (e) {
+                console.error("Error loading state from localStorage", e);
+            }
+        },
+
+        saveStateToLocalStorage(stateToSave: CartState) {
+            try {
+                localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(stateToSave));
+            } catch (e) {
+                console.error("Error saving state to localStorage", e);
+            }
         }
+    })),
+
+    withHooks(store => ({
+        onInit() {
+            store.loadStateFromLocalStorage();
+        },
     }))
 )

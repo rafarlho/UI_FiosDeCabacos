@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, Input, signal, Signal } from '@angular/core';
+import { Component, computed, inject, signal, Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -9,7 +9,6 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { HttpClient } from '@angular/common/http';
 import { finalize, take } from 'rxjs';
-import { products } from '../../products/products-config';
 
 @Component({
   selector: 'app-confirm-cart-dialog',
@@ -70,12 +69,12 @@ export class ConfirmCartDialogComponent {
         })
       ).subscribe({
         next:()  => {
-          this.message.success('Encomenda feita com sucesso! Em breve receberá um email com os detalhes.', {nzDuration:10000});
+          this.message.success('Encomenda feita com sucesso! Em breve receberá um email com os detalhes.', {nzDuration:5000});
           this.cartStore.clearStore()
           this.modalRef.close()
         },
         error: ()=> {
-          this.message.error('Não foi possível fazer a encomenda... Por favor tente mais tarde ou valide os campos inseridos.', {nzDuration:10000});
+          this.message.error('Não foi possível fazer a encomenda... Por favor tente mais tarde ou valide os campos inseridos.', {nzDuration:5000});
         }
       })
       
