@@ -1,5 +1,5 @@
 export interface Product {
-    price: number,
+    price?: number ,
     name: string,
     imagePaths: string[]
 }
