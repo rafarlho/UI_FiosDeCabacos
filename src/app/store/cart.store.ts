@@ -33,7 +33,7 @@ export const CartStore = signalStore(
             const foundItem = currentItems.find((item:CartItem) => item = cartItem)
             if(foundItem) {
                 if(newQuantity === 0) {
-                    currentItems.slice(currentItems.findIndex((item:CartItem) => item === cartItem))
+                    currentItems.splice(currentItems.findIndex((item:CartItem) => item === cartItem))
                 } else {
                     foundItem.quantity = newQuantity
                 }

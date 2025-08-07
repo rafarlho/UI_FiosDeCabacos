@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, Input, Signal } from '@angular/core';
+import { Component, computed, inject, input, Input, signal, Signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -7,6 +7,9 @@ import { CommonModule } from '@angular/common';
 import { CartStore } from '../../../store/cart.store';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { HttpClient } from '@angular/common/http';
+import { finalize, take } from 'rxjs';
+import { products } from '../../products/products-config';
 
 @Component({
   selector: 'app-confirm-cart-dialog',
@@ -22,6 +25,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class ConfirmCartDialogComponent {
 
+  loading = signal(false)
   private cartStore = inject(CartStore)
   totalItems: Signal<number> = computed(() =>
     this.cartStore.selectedItems().reduce(
@@ -44,6 +48,7 @@ export class ConfirmCartDialogComponent {
 
   private modalRef = inject(NzModalRef)
   private message = inject(NzMessageService)
+  private http = inject(HttpClient)
   cancelModal(): void {
     
     this.modalRef.close();
@@ -51,10 +56,36 @@ export class ConfirmCartDialogComponent {
 
   saveUser(): void {
     if (this.user.firstName && this.user.lastName && this.user.email) {
+      this.loading.set(true)
+      this.http.post('https://api-fiosdecabacos.onrender.com/send-email', {
+        to: this.user.email,
+        fullName: this.user.firstName + ' ' + this.user.lastName,
+        totalPrice: this.totalPrice(),
+        totalItems: this.totalItems(),
+        items: this.cartStore.selectedItems()
+      }).pipe(
+        take(1),
+        finalize(()=> {
+          this.loading.set(false)
+        })
+      ).subscribe({
+        next:()  => {
+          this.message.success('Encomenda feita com sucesso! Em breve receberá um email com os detalhes.', {nzDuration:10000});
+          this.cartStore.clearStore()
+          this.modalRef.close()
+        },
+        error: ()=> {
+          this.message.error('Não foi possível fazer a encomenda... Por favor tente mais tarde ou valide os campos inseridos.', {nzDuration:10000});
+        }
+      })
       
-      this.modalRef.close();
     } else {
       this.message.warning('Por favor, preencha todos os campos.');
     }
+  }
+  sendEmail(userEmail: string) {
+    return this.http.post('https://api-fiosdecabacos.onrender.com/send-email', {
+      to: userEmail
+    });
   }
 }

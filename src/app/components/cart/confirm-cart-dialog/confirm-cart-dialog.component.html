@@ -29,6 +29,6 @@
 </div>
 
 <div class="flex justify-end gap-2 mt-6">
-    <button nz-button nzType="default" (click)="cancelModal()">Cancelar</button>
-    <button nz-button nzType="primary" (click)="saveUser()">Encomendar</button>
+    <button nz-button nzType="default" [disabled]="loading()" (click)="cancelModal()">Cancelar</button>
+    <button nz-button nzType="primary" [nzLoading]="loading()" (click)="saveUser()">Encomendar</button>
 </div>
