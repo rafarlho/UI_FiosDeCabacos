@@ -3,18 +3,18 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { Product } from '../../../models/product.model';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CartStore } from '../../../store/cart.store';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ImageSliderComponent } from "../../../common/image-slider/image-slider.component";
 
 @Component({
   selector: 'app-product-card',
   imports: [
-    NzAvatarModule, 
-    NzCardModule, 
+    NzAvatarModule,
+    NzCardModule,
     NzIconModule,
-    CarouselModule
-  ],
+    ImageSliderComponent
+],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss'
 })
@@ -24,15 +24,6 @@ export class ProductCardComponent {
 
   private message = inject(NzMessageService)
 
-  carouselOptions: OwlOptions = {
-    loop: true,
-    items: 1,
-    dots: true,
-    nav: false,
-    autoplay: true,
-    autoplayTimeout: 5000,
-    autoplayHoverPause: true
-  };  
 
   readonly cartStore = inject(CartStore)
 

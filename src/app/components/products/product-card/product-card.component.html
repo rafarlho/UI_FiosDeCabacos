@@ -1,24 +1,24 @@
-<div  class="product-card stitched-border">
-    <div class="min-h-[150px]">
-        <owl-carousel-o [options]="carouselOptions">
-            @for (image of product().imagePaths; track $index) {
-                <ng-template carouselSlide>
-                    <img [src]="image" alt="product image" class="w-full h-auto max-h-[150px] object-contain" />
-                </ng-template>
-            }
-        </owl-carousel-o>
-    </div>
-    <div class="product-footer">
-        <div class="info">
-            <h3>{{ product().name }}</h3>
+<div  class="product-card ">
+    <div class="stitched-border inside-container">
+
+        <div class="image-selector">  
+            <app-image-slider 
+            [slides]="product().imagePaths"
+            />
+        </div>
+        
+        <div class="product-footer">
+            <div class="info">
+                <h3>{{ product().name }}</h3>
             @if(product().price) {
                 <p>{{ product().price }}€</p>
             } @else {
                 <p>Sob consulta</p>
             }
         </div>
-        <button class="add-btn" (click)="addToCart()">
-            🛒 Adicionar
-        </button>
+            <button class="add-btn" (click)="addToCart()">
+                🛒 Adicionar
+            </button>
+        </div>
     </div>
 </div>

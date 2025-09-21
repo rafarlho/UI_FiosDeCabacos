@@ -1,8 +1,12 @@
-<div class="h-full w-full flex flex-col">
-    <div class="h-[100%]">
-        <app-image-auto-carrousel/>
+<div class="h-full w-full flex flex-col items-center">
+    <div class="flex-1 max-w-[900px] w-full stitched-border ">
+        <app-image-slider 
+            [slides]="slides"
+            [autoPlay]="true"
+            [indicatorsVisible]="false"
+        />
     </div>
-    <div class="flex flex-1 min-h-[25%] items-center pb-[12.5%] justify-center">
+    <div class="flex h-[20%]  items-center justify-center">
     <button class="stitched"
         routerLink="/products"
     >
