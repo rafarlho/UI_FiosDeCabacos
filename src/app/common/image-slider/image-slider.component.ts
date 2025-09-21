@@ -3,6 +3,7 @@ import { NzButtonModule } from "ng-zorro-antd/button";
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzImageModule, NzImageService } from 'ng-zorro-antd/image';
 import { products } from '../../components/products/products-config';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-image-slider',
@@ -55,9 +56,10 @@ export class ImageSliderComponent {
 
 
   viewImageInDetail(index:number) {
+    const srcs = this.slides().filter(slide => slide != this.slides()[index]).map(slide => ({src: slide}) )
     this.nzImageService.preview([{
       src: this.slides()[index],
-    }],
+    }].concat(srcs),
     
   )
   }
