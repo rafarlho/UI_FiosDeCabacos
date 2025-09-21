@@ -1,0 +1,29 @@
+<div class="relative h-full">
+    <div 
+    [style]="{'background-image': 'url(' + slides()[currentSlide()] + ')', opacity: hidden()? 0 : 1}"
+    class="w-full h-full bg-contain bg-center bg-no-repeat relative transition-opacity duration-200 ease-in-out"
+    (click)="viewImageInDetail(currentSlide())"
+    >
+    </div>
+
+    @if(indicatorsVisible()) {
+        <div class="absolute flex justify-center left-0 right-0 bottom-5 m-auto ">
+            @for (slide of slides(); track $index) {
+                <div 
+                (click)="jumpToSlide($index)"
+                [class]="
+                'w-[20px] h-[20px] rounded-[50%] cursor-pointer inline-block mx-[5px] border transition-colors duration-500 ease-in-out' +
+                (currentSlide() === $index ? 'border-white! bg-stone-700' : 'border-stone-700 bg-white')
+                "
+                ></div>
+            }
+        </div>
+        
+        <button nz-button class="absolute! top-[50%] left-5" (click)="previous()">
+            <nz-icon nzType="left" nzTheme="outline" />
+        </button>
+        <button nz-button class="absolute! top-[50%] right-5" (click)="next()">  
+            <nz-icon nzType="right" nzTheme="outline" />
+        </button>
+    }
+</div>

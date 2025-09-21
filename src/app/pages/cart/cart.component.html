@@ -4,7 +4,7 @@
             <button nz-button nzGhost nzType="primary"  (click)="openUserInfoModal()">Encomendar artigos selecionados</button>
     </div>
 }
-<div class="flex-1 w-full flex flex-col p-[10px] gap-[10px]">
+<div class="flex-1 w-full flex flex-col p-[10px] gap-[10px] max-w-[800px] mx-auto">
     @for (item of cartStoreItems(); track $index) {
         <div class="grid py-[10px] px-[5px] grid-cols-2 outline rounded-md border-[#00397a]" >
             <img [src]="item.product.imagePaths[0]" [alt]="item.product.name" class="max-h-[150px] justify-self-center">
